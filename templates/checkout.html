@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 py-20">
+    <h1 class="text-3xl font-serif text-luxury-purple text-center mb-12">Secure Checkout</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- Shipping & Payment Form -->
+        <div class="bg-white border border-slate-200 p-8 shadow-sm">
+            <h2 class="text-sm uppercase tracking-widest font-bold text-slate-900 mb-6">Billing & Shipping Details</h2>
+            <form method="POST" class="space-y-4 text-sm">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="First Name" required class="bg-slate-50 border border-slate-200 p-3 w-full text-slate-900">
+                    <input type="text" placeholder="Last Name" required class="bg-slate-50 border border-slate-200 p-3 w-full text-slate-900">
+                </div>
+                <input type="email" placeholder="Email Address" required class="bg-slate-50 border border-slate-200 p-3 w-full text-slate-900">
+                <input type="text" placeholder="Shipping Address" required class="bg-slate-50 border border-slate-200 p-3 w-full text-slate-900">
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="text" placeholder="City" required class="bg-slate-50 border border-slate-200 p-3 text-slate-900">
+                    <input type="text" placeholder="State" required class="bg-slate-50 border border-slate-200 p-3 text-slate-900">
+                    <input type="text" placeholder="ZIP" required class="bg-slate-50 border border-slate-200 p-3 text-slate-900">
+                </div>
+                
+                <h2 class="text-sm uppercase tracking-widest font-bold text-slate-900 pt-4 mb-2">Payment Information</h2>
+                <input type="text" placeholder="Card Number" required class="bg-slate-50 border border-slate-200 p-3 w-full text-slate-900">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="MM / YY" required class="bg-slate-50 border border-slate-200 p-3 text-slate-900">
+                    <input type="text" placeholder="CVV" required class="bg-slate-50 border border-slate-200 p-3 text-slate-900">
+                </div>
+
+                <button type="submit" class="w-full bg-luxury-gold text-slate-900 py-3 uppercase tracking-widest text-xs font-bold hover:bg-opacity-90 transition mt-4 cursor-pointer">
+                    Complete Order (${{ "%.2f"|format(total_price) }})
+                </button>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="bg-white border border-slate-200 p-8 shadow-sm h-fit">
+            <h2 class="text-sm uppercase tracking-widest font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3">Order Summary</h2>
+            
+            <div class="space-y-4 mb-6">
+                {% for item in cart_items %}
+                <div class="flex justify-between items-center text-sm">
+                    <div>
+                        <p class="font-serif font-semibold text-slate-900">{{ item.name }}</p>
+                        <p class="text-xs text-slate-500">100% Organic Coconut-Soy</p>
+                    </div>
+                    <span class="font-medium">${{ "%.2f"|format(item.price) }}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="border-t border-slate-100 pt-4 space-y-2 text-xs text-slate-600">
+                <div class="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>${{ "%.2f"|format(total_price) }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Shipping</span>
+                    <span>FREE</span>
+                </div>
+                <div class="flex justify-between font-bold text-slate-900 text-sm pt-2 border-t border-slate-100">
+                    <span>Total</span>
+                    <span class="text-luxury-purple">${{ "%.2f"|format(total_price) }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

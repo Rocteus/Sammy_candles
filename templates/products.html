@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+        <h1 class="text-4xl font-serif text-luxury-purple mb-4">Organic Candle Collection</h1>
+        <p class="text-slate-600 text-sm leading-relaxed">
+            Every candle is hand-poured using sustainable coconut-soy wax and lead-free cotton wicks. Completely free from parabens, paraffin, and synthetic toxins.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {% for product in products %}
+        <div class="bg-white border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+            <div>
+                <div class="bg-slate-100 h-72 mb-6 flex items-center justify-center border border-slate-200 text-xs text-slate-400 uppercase tracking-widest">
+                    [Product Image]
+                </div>
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-serif text-xl text-slate-900">{{ product.name }}</h3>
+                    <span class="text-luxury-gold font-bold text-sm">${{ "%.2f"|format(product.price) }}</span>
+                </div>
+                <p class="text-xs text-slate-500 mb-4">{{ product.wax }} • Burn Time: {{ product.burn_time }}</p>
+                <p class="text-sm text-slate-700 mb-4">{{ product.tagline }}</p>
+                
+                <div class="bg-slate-50 p-4 border border-slate-100 text-xs text-slate-600 space-y-1 mb-6">
+                    <p class="font-semibold text-slate-900 uppercase tracking-wider text-[10px]">Fragrance Profile</p>
+                    <p>{{ product.notes }}</p>
+                </div>
+            </div>
+
+            <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="w-full bg-luxury-purple text-white text-center py-3 uppercase tracking-widest text-xs font-medium hover:bg-opacity-90 transition border border-luxury-gold">
+                Add to Bag
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-serif text-luxury-purple mb-3">Customer Care & Inquiries</h1>
+        <p class="text-slate-600 text-sm">Have questions about scent notes, custom orders, or shipping? Reach out below.</p>
+    </div>
+
+    <div class="bg-white border border-slate-200 p-8 shadow-sm">
+        <form method="POST" class="space-y-6">
+            <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-900 mb-2">Your Name</label>
+                <input type="text" name="name" required class="w-full bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-luxury-purple">
+            </div>
+            <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-900 mb-2">Email Address</label>
+                <input type="email" name="email" required class="w-full bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-luxury-purple">
+            </div>
+            <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-900 mb-2">Message or Concern</label>
+                <textarea name="message" rows="5" required class="w-full bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-luxury-purple"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-luxury-purple text-white py-3 uppercase tracking-widest text-xs font-semibold hover:bg-opacity-90 transition border border-luxury-gold">
+                Send Message
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

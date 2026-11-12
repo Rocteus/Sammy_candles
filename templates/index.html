@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero Section -->
+<section class="relative bg-luxury-purple text-white py-24 px-6 text-center overflow-hidden border-b border-luxury-gold/20">
+    <div class="max-w-3xl mx-auto relative z-10">
+        <span class="text-luxury-gold uppercase tracking-widest text-xs font-semibold block mb-3">Handmade & Organic</span>
+        <h1 class="text-4xl md:text-6xl font-serif mb-6 leading-tight">Elevate Your Space with Clean, Luxury Scents</h1>
+        <p class="text-slate-200 font-light text-base md:text-lg mb-8 max-w-xl mx-auto">
+            Crafted with 100% organic coconut-soy wax, phthalate-free fragrance oils, and zero harmful chemicals.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{{ url_for('products') }}" class="bg-luxury-gold text-slate-900 font-semibold px-8 py-3 uppercase tracking-widest text-xs hover:bg-opacity-90 transition">
+                Shop The Collection
+            </a>
+            <a href="{{ url_for('quiz') }}" class="border border-luxury-gold text-luxury-gold px-8 py-3 uppercase tracking-widest text-xs hover:bg-luxury-gold hover:text-slate-900 transition">
+                Take Scent Quiz ✨
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Prominent Scent Quiz Callout Banner -->
+<section class="bg-white border-b border-slate-200 py-12 px-6 text-center">
+    <div class="max-w-2xl mx-auto">
+        <span class="text-luxury-gold text-xs uppercase tracking-widest font-bold">Unsure which scent fits your space?</span>
+        <h2 class="text-2xl font-serif text-luxury-purple mt-2 mb-3">Find Your Signature Match in 30 Seconds</h2>
+        <p class="text-slate-600 text-sm mb-6">Take our interactive quiz to discover the organic fragrance tailored to your atmosphere.</p>
+        <a href="{{ url_for('quiz') }}" class="inline-block bg-luxury-purple text-white px-8 py-3 text-xs uppercase tracking-widest font-medium border border-luxury-gold hover:bg-opacity-90 transition">
+            Start The Quiz ➔
+        </a>
+    </div>
+</section>
+
+<!-- Featured Launch Products -->
+<section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-serif text-luxury-purple mb-2">The Launch Trio</h2>
+        <p class="text-slate-600 text-sm">Three signature fragrances, meticulously hand-poured in small batches.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {% for product in featured %}
+        <div class="bg-white border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+            <div>
+                <div class="bg-slate-100 h-64 mb-6 flex items-center justify-center border border-slate-200 text-xs text-slate-400 uppercase tracking-widest">
+                    [Product Image]
+                </div>
+                <h3 class="font-serif text-xl text-slate-900 mb-1">{{ product.name }}</h3>
+                <p class="text-xs text-luxury-gold font-semibold uppercase tracking-wider mb-3">${{ "%.2f"|format(product.price) }}</p>
+                <p class="text-sm text-slate-600 mb-4">{{ product.tagline }}</p>
+                <p class="text-xs text-slate-500 bg-slate-50 p-3 border border-slate-100 mb-4"><strong>Notes:</strong> {{ product.notes }}</p>
+            </div>
+            <a href="{{ url_for('checkout') }}" class="w-full bg-slate-900 text-white text-center py-3 uppercase tracking-widest text-xs font-medium hover:bg-luxury-purple transition">
+                Secure Yours
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

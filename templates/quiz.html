@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 py-16">
+    <div class="text-center mb-12">
+        <span class="text-luxury-gold uppercase tracking-widest text-xs font-semibold block mb-2">Interactive Experience</span>
+        <h1 class="text-4xl font-serif text-luxury-purple mb-3">Scent Finder Quiz</h1>
+        <p class="text-slate-600 text-sm">Answer one quick question to find your ideal organic candle match.</p>
+    </div>
+
+    {% if not matched_candle %}
+    <div class="bg-white border border-slate-200 p-8 shadow-sm">
+        <form method="POST" class="space-y-6">
+            <div>
+                <label class="block font-serif text-lg text-slate-900 mb-4">What atmosphere are you trying to create in your space?</label>
+                
+                <div class="space-y-3">
+                    <label class="flex items-center p-4 border border-slate-200 bg-slate-50 hover:border-luxury-gold cursor-pointer transition">
+                        <input type="radio" name="vibe" value="moody" required class="text-luxury-purple focus:ring-luxury-purple">
+                        <span class="ml-3 text-sm text-slate-800"><strong>Moody & Sophisticated</strong> — Deep, smoky notes with rich warmth.</span>
+                    </label>
+
+                    <label class="flex items-center p-4 border border-slate-200 bg-slate-50 hover:border-luxury-gold cursor-pointer transition">
+                        <input type="radio" name="vibe" value="warm" required class="text-luxury-purple focus:ring-luxury-purple">
+                        <span class="ml-3 text-sm text-slate-800"><strong>Warm & Luminous</strong> — Golden, cocooning, and subtly sweet.</span>
+                    </label>
+
+                    <label class="flex items-center p-4 border border-slate-200 bg-slate-50 hover:border-luxury-gold cursor-pointer transition">
+                        <input type="radio" name="vibe" value="clean" required class="text-luxury-purple focus:ring-luxury-purple">
+                        <span class="ml-3 text-sm text-slate-800"><strong>Soft & Effortlessly Clean</strong> — Crisp florals, cashmere, and airy notes.</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-luxury-purple text-white py-3 uppercase tracking-widest text-xs font-semibold hover:bg-opacity-90 transition border border-luxury-gold">
+                Discover My Match ✨
+            </button>
+        </form>
+    </div>
+
+    {% else %}
+    <div class="bg-white border-2 border-luxury-gold p-8 text-center shadow-md">
+        <span class="text-xs uppercase tracking-widest text-luxury-gold font-bold block mb-2">Your Custom Recommendation</span>
+        <h2 class="text-3xl font-serif text-luxury-purple mb-3">{{ matched_candle.name }}</h2>
+        <p class="text-sm text-slate-700 mb-4 font-light">{{ matched_candle.tagline }}</p>
+        
+        <div class="bg-slate-50 p-4 border border-slate-100 text-xs text-slate-600 mb-6 text-left">
+            <p class="font-semibold text-slate-900 uppercase tracking-wider text-[10px] mb-1">Fragrance Notes</p>
+            <p>{{ matched_candle.notes }}</p>
+            <p class="mt-2 text-slate-500">{{ matched_candle.wax }} • ${{ "%.2f"|format(matched_candle.price) }}</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="{{ url_for('add_to_cart', product_id=matched_candle.id) }}" class="flex-1 bg-luxury-gold text-slate-900 py-3 uppercase tracking-widest text-xs font-bold hover:bg-opacity-90 transition text-center">
+                Add to Bag (${{ "%.2f"|format(matched_candle.price) }})
+            </a>
+            <a href="{{ url_for('quiz') }}" class="flex-1 border border-slate-300 text-slate-700 py-3 uppercase tracking-widest text-xs font-medium hover:bg-slate-50 transition text-center">
+                Retake Quiz
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 py-24 text-center">
+    <div class="bg-white border-2 border-luxury-gold p-10 shadow-sm">
+        <span class="text-luxury-gold text-2xl block mb-2">✨</span>
+        <h1 class="text-4xl font-serif text-luxury-purple mb-4">Order Confirmed</h1>
+        <p class="text-slate-700 text-sm mb-6 leading-relaxed">
+            Thank you for your order! Your organic, hand-poured candles are being carefully prepared in small batches. We have sent a confirmation email with your tracking details.
+        </p>
+        <div class="bg-slate-50 p-4 border border-slate-200 text-xs text-slate-600 mb-8 inline-block">
+            Order Reference: <strong class="text-slate-900">#AW-{{ range(1000, 9999) | random }}</strong>
+        </div>
+        <div>
+            <a href="{{ url_for('home') }}" class="inline-block bg-luxury-purple text-white px-8 py-3 text-xs uppercase tracking-widest font-medium border border-luxury-gold hover:bg-opacity-90 transition">
+                Return to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

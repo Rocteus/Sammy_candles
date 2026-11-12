@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Organic Hand-Poured Candles</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-luxury-purple { background-color: #3B1E54; }
+        .text-luxury-gold { color: #C5A059; }
+        .border-luxury-gold { border-color: #C5A059; }
+        .bg-luxury-gold { background-color: #C5A059; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Announcement Bar -->
+    <div class="bg-luxury-purple text-luxury-gold text-xs tracking-widest text-center py-2 uppercase font-medium">
+        ✨ Free shipping on orders over $50 • 100% Organic & Hand-Poured in Small Batches ✨
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="{{ url_for('home') }}" class="text-2xl font-serif tracking-wide text-luxury-purple font-bold">
+                AURA & WAX
+            </a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wider uppercase items-center">
+                <a href="{{ url_for('home') }}" class="hover:text-luxury-gold transition">Home</a>
+                <a href="{{ url_for('products') }}" class="hover:text-luxury-gold transition">Collection</a>
+                <a href="{{ url_for('quiz') }}" class="text-luxury-gold hover:underline transition">✨ Scent Quiz</a>
+                <a href="{{ url_for('about') }}" class="hover:text-luxury-gold transition">Our Story</a>
+                <a href="{{ url_for('contact') }}" class="hover:text-luxury-gold transition">Contact</a>
+            </nav>
+            <div>
+                <a href="{{ url_for('checkout') }}" class="bg-luxury-purple text-white px-5 py-2.5 rounded-none text-xs uppercase tracking-widest hover:bg-opacity-90 transition border border-luxury-gold">
+                    Bag ({{ cart_count }})
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="max-w-xl mx-auto mt-4 px-6">
+                    {% for category, message in messages %}
+                        <div class="bg-white border-l-4 border-luxury-gold p-4 shadow-sm text-sm">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-luxury-purple text-white py-12 border-t border-luxury-gold/30">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+            <div>
+                <h3 class="font-serif text-lg text-luxury-gold mb-3">Aura & Wax</h3>
+                <p class="text-slate-300 leading-relaxed font-light">Hand-poured organic candles crafted with clean ingredients, zero harmful chemicals, and pure luxury.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-luxury-gold uppercase tracking-wider text-xs mb-3">Quick Links</h4>
+                <ul class="space-y-2 text-slate-300">
+                    <li><a href="{{ url_for('products') }}" class="hover:text-luxury-gold">Shop Collection</a></li>
+                    <li><a href="{{ url_for('quiz') }}" class="hover:text-luxury-gold">Scent Quiz</a></li>
+                    <li><a href="{{ url_for('about') }}" class="hover:text-luxury-gold">Our Ingredients</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="hover:text-luxury-gold">Customer Care</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-luxury-gold uppercase tracking-wider text-xs mb-3">Stay Connected</h4>
+                <p class="text-slate-300 text-xs mb-3">Join our list for private release drops.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Your email address" class="bg-white text-slate-900 px-3 py-2 text-xs w-full focus:outline-none">
+                    <button type="submit" class="bg-luxury-gold text-slate-900 px-4 text-xs font-bold uppercase">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-6 mt-12 pt-6 border-t border-white/10 text-center text-xs text-slate-400">
+            &copy; 2026 Aura & Wax. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
