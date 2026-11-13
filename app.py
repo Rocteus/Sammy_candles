@@ -17,6 +17,12 @@ def home():
     cart_count = sum(cart.values())
     return render_template('index.html', cart_count=cart_count)
 
+@app.route('/products')
+def products():
+    cart = session.get('cart', {})
+    cart_count = sum(cart.values())
+    return render_template('products.html', products=PRODUCTS, cart_count=cart_count)
+
 @app.route('/collection')
 def collection():
     cart = session.get('cart', {})
