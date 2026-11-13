@@ -35,7 +35,13 @@ def quiz():
     cart_count = sum(cart.values())
     
     if request.method == 'POST':
-        return redirect(url_for('collection'))
+        # Get the selected category/preference from the quiz form
+        selected_category = request.form.get('category', 'Woody')
+        
+        # Match the user's answer to the corresponding product
+        matched_product = next((p for p in PRODUCTS if p['category'].lower() == selected_category.lower()), PRODUCTS[0])
+        
+        return render_template('quiz_result.html', product=matched_product, cart_count=cart_count)
         
     return render_template('quiz.html', cart_count=cart_count)
 
@@ -104,3 +110,4 @@ def thank_you():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
