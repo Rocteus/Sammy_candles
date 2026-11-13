@@ -29,10 +29,14 @@ def collection():
     cart_count = sum(cart.values())
     return render_template('collection.html', products=PRODUCTS, cart_count=cart_count)
 
-@app.route('/quiz')
+@app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     cart = session.get('cart', {})
     cart_count = sum(cart.values())
+    
+    if request.method == 'POST':
+        return redirect(url_for('collection'))
+        
     return render_template('quiz.html', cart_count=cart_count)
 
 @app.route('/about')
@@ -46,6 +50,12 @@ def contact():
     cart = session.get('cart', {})
     cart_count = sum(cart.values())
     return render_template('contact.html', cart_count=cart_count)
+
+@app.route('/refunds')
+def refunds():
+    cart = session.get('cart', {})
+    cart_count = sum(cart.values())
+    return render_template('refunds.html', cart_count=cart_count)
 
 @app.route('/bag')
 def bag():
